@@ -18,4 +18,13 @@ irb(main):037:0> 10000000.times { f << "{\"id\": #{Faker::Number.number(10)}, \"
 
 This script uses Redis as a backend to keep memory costs low. As such, you'll have to update line 4 to point to your own Redis instance. In my case, I just spun up a quick test instance in Docker locally.
 
+`$ docker pull redis
+ $ docker run --name some-redis -P -d redis`
+
+Update line 4:
+
 `lookup_table = Redis.new(host: "<your_redis_host>", port: <your_redis_port>)`
+
+Then run it with:
+
+`$ cat anagram_feeder.json | ruby anagram_detector.rb`
